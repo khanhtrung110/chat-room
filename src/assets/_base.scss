@@ -1,0 +1,15 @@
+
+@layer components   {
+    body{
+        background: #e3e1ff;
+        color: #444;
+        
+     }
+     .container{
+         background-color: $color-white-0;
+         @apply w-[90%] max-w-[960px] my-[80px] mx-auto rounded-[20px] ;
+         box-shadow: $box-shadow;
+         
+     }
+}
+
