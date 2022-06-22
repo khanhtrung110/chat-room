@@ -8,13 +8,20 @@
 
 <script>
 import {ref} from 'vue'
-
+import userLogin from '../composables/userLogin'
 export default {
-    setup(){
+    setup(props, context){
+        const {error , login} = userLogin();
+
+
         const email = ref('')
         const password = ref('')
-        const handleSubmit = () =>{
-            console.log( email.value, password.value)
+        const handleSubmit = async () =>{
+          await login(email.value,   password.value) 
+          if (!error.value) {
+            console.log('hehe')
+              context.emit('login')
+          }
         }
 
 

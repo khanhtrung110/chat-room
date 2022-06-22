@@ -1,0 +1,14 @@
+nav{
+ border-bottom: 1px solid $color-white-2;
+ padding: $sp-20;
+ @apply flex justify-between items-center;
+    p{
+        margin: 2px auto;
+        font-size: $fs-16;
+        color: $color-black-1;
+    }  
+    p.email{
+        font-size: $fs-14;
+        color: $color-black-2;
+    }
+}

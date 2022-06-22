@@ -5,7 +5,7 @@ import { projectAuth } from '../firebase/config';
 // they don't need to be re-created every time we invoke useSignup
 const error = ref(null);
 
-const signup = async (email, password, displayName) => {
+const signup = async (email, password,displayName) => {
   error.value = null
 
   try {
