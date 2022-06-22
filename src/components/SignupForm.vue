@@ -10,7 +10,6 @@
 
 <script>
 import { ref } from 'vue'
-
 import userSignup from '../composables/useSignup'
 export default {
   setup(props, context) {
@@ -27,11 +26,9 @@ export default {
               context.emit('signup')
           }
     }
-
     return { displayName, email, password, handleSubmit, error }
   }
 }
 </script>
 <style>
-
 </style>

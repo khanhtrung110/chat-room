@@ -2,33 +2,38 @@
   <form @submit.prevent="handleSubmit">
     <input type="email" required placeholder="email" v-model="email">
     <input type="password" required placeholder="password" v-model="password">
+     <div class="error">{{ error }}</div> 
     <button>Log in</button>
   </form>
 </template>
 
 <script>
-import {ref} from 'vue'
-import userLogin from '../composables/userLogin'
+import { ref } from 'vue'
+import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
 export default {
-    setup(props, context){
-        const {error , login} = userLogin();
-
-
-        const email = ref('')
-        const password = ref('')
-        const handleSubmit = async () =>{
-          await login(email.value,   password.value) 
-          if (!error.value) {
-            console.log('hehe')
-              context.emit('login')
-          }
+  setup(props,context) {
+    const email = ref('')
+    const password = ref('')
+    const error = ref(null)
+    const store = useStore()
+    const router = useRouter()
+    const handleSubmit = async () => {
+      try {
+        await store.dispatch('login', {
+          email: email.value,
+          password: password.value
         }
-
-
-        return { email, password,handleSubmit}
+        )
+         context.emit('login')
+      }
+      catch (err) {
+        error.value = err.message
+      }
     }
+    return { handleSubmit, email, password, error }
+  }
 }
 </script>
 <style>
-
 </style>
