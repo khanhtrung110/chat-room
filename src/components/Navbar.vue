@@ -1,16 +1,30 @@
 <template>
-  <nav>
-    <div>
-        <p>Hey there... display name here</p>
-        <p class="email">Currently logged in as .... email</p>
+  <nav v-if="user">
+    <div >
+        <p>Hey there... display name {{user.displayName}}</p>
+        <p class="email">Currently logged in as {{user.email}}</p>
     </div>
-    <button>Logout</button>
+    <button @click="handleSubmit">Logout</button>
   </nav>
 </template>
 
 <script>
+import { ref } from 'vue'
+import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
 export default {
-
+  setup(props,context) {
+     
+    const store = useStore()
+    const user = store.getters.getuser
+    console.log(user)
+    const handleSubmit = async () => {
+        await store.dispatch('logout'
+        )
+        console.log('user logger  ')
+    }
+    return { handleSubmit, user }
+  }
 }
 </script>
 

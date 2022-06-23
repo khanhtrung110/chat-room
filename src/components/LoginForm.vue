@@ -25,7 +25,8 @@ export default {
           password: password.value
         }
         )
-         context.emit('login')
+          router.push({ name: 'Chatroom' });
+         console.log(store.state.loginFuntion.user)
       }
       catch (err) {
         error.value = err.message

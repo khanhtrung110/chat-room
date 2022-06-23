@@ -10,23 +10,31 @@
 
 <script>
 import { ref } from 'vue'
-import userSignup from '../composables/useSignup'
+import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
 export default {
-  setup(props, context) {
-    const {error , signup} = userSignup()
-    // refs
-    const displayName = ref('')
+  setup(props,context) {
     const email = ref('')
     const password = ref('')
-   
-    const handleSubmit = async() =>{
-      await signup(email.value , password.value, displayName.value)
-      if (!error.value) {
-              
-              context.emit('signup')
-          }
+    const displayName = ref('')
+    const error = ref(null)
+    const store = useStore()
+    const router = useRouter()
+    const handleSubmit = async () => {
+      try {
+        await store.dispatch('signup', {
+          email: email.value,
+          password: password.value,
+          displayName: displayName.value
+        }
+        )
+         router.push({ name: 'Chatroom' });
+      }
+      catch (err) {
+        error.value = err.message
+      }
     }
-    return { displayName, email, password, handleSubmit, error }
+    return { handleSubmit, email, password, error, displayName}
   }
 }
 </script>

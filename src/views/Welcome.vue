@@ -31,7 +31,7 @@ export default {
     const showLogin = ref(true)
     const router = useRouter()
     const enterChat = () => {
-      console.log('thanh cong')
+      console.log('thanh cong roi yes')
       router.push({ name: 'Chatroom' });
     };
 
