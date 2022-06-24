@@ -1,6 +1,6 @@
 <template>
   <div class="welcome container">
-    <p>Welcome</p>
+    <p>Welcome {{alertText}}</p> 
     <div v-if="showLogin">
       <h2>Login</h2>
       <LoginForm @login="enterChat" />
@@ -28,14 +28,17 @@ import { useRouter } from "vue-router";
 export default {
   components: { SignupForm, LoginForm },
   setup() {
+    const alertText= ref("not yet")
     const showLogin = ref(true)
     const router = useRouter()
     const enterChat = () => {
-      console.log('thanh cong roi yes')
-      router.push({ name: 'Chatroom' });
+      // router.push({ name: 'Chatroom' });
     };
 
-    return { showLogin, enterChat };
+    return { 
+      showLogin,
+      alertText,
+      enterChat };
   },
 };
 </script>

@@ -13,28 +13,28 @@
 <script>
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
-import { ref } from "vue";
+import { ref, watchEffect } from "vue";
 import { timestamp } from "../firebase/config";
+
 export default {
   setup() {
     const store = useStore();
-    const error = ref("");
+    const error = ref("")
     const message = ref("");
     const user = store.getters.getuser;
-
     const handleSubmit = async () => {
       const chat = {
-        name: user.displayName,
-        message: message.value,
-        createdAt: timestamp()
+        name: user.displayName || null,
+        message: message.value || null,
+        createdAt: timestamp() || null
       };
+      
       try {
-        await store.dispatch('addDoc',chat)
-        // massage = ''
+      await store.dispatch('addDoc',chat)
+      message.value = '';
       } catch (err) {
-        error.value = err.message;
+       error.value = err;
       }
-      console.log(chat);
     };
 
     return { message, handleSubmit,error };

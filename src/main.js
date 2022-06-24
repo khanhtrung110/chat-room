@@ -9,8 +9,9 @@ import './assets/style.scss'
 
 
 let app
-projectAuth.onAuthStateChanged(()=>{
-    if (!app) {
-        createApp(App).use(store).use(router).mount('#app')
-    }
-})
+createApp(App).use(store).use(router).mount('#app')
+// projectAuth.onAuthStateChanged(()=>{
+//     if (!app) {
+//         createApp(App).use(store).use(router).mount('#app')
+//     }
+// })

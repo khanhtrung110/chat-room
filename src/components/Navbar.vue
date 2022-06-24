@@ -14,14 +14,11 @@ import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 export default {
   setup(props,context) {
-     
+    const router = useRouter()
     const store = useStore()
     const user = store.getters.getuser
-    console.log(user)
     const handleSubmit = async () => {
-        await store.dispatch('logout'
-        )
-        console.log('user logger  ')
+      await store.dispatch('logout')
     }
     return { handleSubmit, user }
   }
